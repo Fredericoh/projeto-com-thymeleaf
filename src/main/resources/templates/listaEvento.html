@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="layoutPadrao">
+<head>
+<meta charset="UTF-8" />
+	<title>Lista de eventos</title>
+</head>
+<section layout:fragment="conteudo">
+	<h4>Lista de eventos</h4>
+
+<div class="container">
+	<br />
+	<br />
+	
+	<table class="table">
+
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Local</th>
+				<th>Data do evento</th>
+				<th>Horario</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="evento : ${eventos}">
+				<td th:text="${evento.idEvento}"></td>
+				<td th:text="${evento.nome}"></td>
+				<td th:text="${evento.local}"></td>
+				<td th:text="${evento.data}"></td>
+				<td th:text="${evento.horario}"></td>
+				<td>
+					<a class="btn btn-primary" th:href="@{/eventos/editar/{id}(id=${evento.idEvento})}">Editar</a>
+					<a class="btn btn-danger" th:href="@{/eventos/excluir/{id}(id=${evento.idEvento})}"
+					onclick="return confirm('Confirma a exclusão ?')">Excluir</a>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" th:if="${#lists.isEmpty(eventos)}" >Nenhum produto cadastrado!</td>
+			</tr>
+		</tbody>
+
+	</table>
+</div>
+</section>
+</html>
